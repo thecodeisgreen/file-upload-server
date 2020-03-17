@@ -1,0 +1,23 @@
+kind: pipeline
+name: default
+
+workspace:
+  base: /service
+
+steps:
+- name: build-image
+  image: plugins/docker
+  settings:
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+    repo: thecodeisgreen/file-upload-server
+    auto_tag: true
+    build_args:
+      - BUILD_VERSION=${DRONE_TAG}
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - tag
