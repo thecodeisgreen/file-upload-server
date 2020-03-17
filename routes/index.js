@@ -16,7 +16,7 @@ router.get('/info', function(req, res) {
 router.post('/file/upload', upload.single('file'), function (req, res, next) {
   res.send({
     id: req.file.filename,
-    url: `http://localhost:${process.env.PORT}/file/${req.file.filename}`
+    url: `${process.env.PUBLIC_HOST}/file/${req.file.filename}`
   })
 })
 

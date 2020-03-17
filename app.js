@@ -22,9 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  if (R.has('FRONTEND_URL', process.env)) {
-    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
-  }
+  const frontEndUrl = R.propOr("*", "FRONTEND_URL", process)
+  res.header("Access-Control-Allow-Origin", frontEndUrl); 
   next();  
 });
 
